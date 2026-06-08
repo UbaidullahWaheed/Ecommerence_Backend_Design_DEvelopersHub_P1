@@ -1,0 +1,47 @@
+<%- include('../partials/header') %>
+<div class="admin-layout">
+  <nav class="admin-sidebar">
+    <div class="admin-sidebar-title">Main</div>
+    <a href="/admin" class="sidebar-link"><span class="sidebar-link-icon">📊</span>Dashboard</a>
+    <a href="/admin/products" class="sidebar-link active"><span class="sidebar-link-icon">📦</span>Products</a>
+    <a href="/admin/products/new" class="sidebar-link"><span class="sidebar-link-icon">➕</span>Add Product</a>
+    <div class="admin-sidebar-title">Store</div>
+    <a href="/products" class="sidebar-link"><span class="sidebar-link-icon">🛍️</span>View Store</a>
+    <a href="/logout" class="sidebar-link"><span class="sidebar-link-icon">🚪</span>Logout</a>
+  </nav>
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div><h1>Manage Products</h1><p><%= products.length %> total products in store</p></div>
+      <a href="/admin/products/new" class="btn btn-primary">+ Add New Product</a>
+    </div>
+    <div class="admin-card">
+      <% if(products.length>0){ %>
+        <table class="admin-table">
+          <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Featured</th><th>Actions</th></tr></thead>
+          <tbody>
+            <% products.forEach(function(p){ %>
+              <tr>
+                <td><img src="<%= p.image %>" class="table-thumb" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100'"></td>
+                <td class="table-name"><%= p.name %></td>
+                <td><span class="cat-pill"><%= p.category %></span></td>
+                <td><strong>$<%= p.price.toFixed(2) %></strong><% if(p.originalPrice&&p.originalPrice>p.price){%><br><span style="font-size:.75rem;color:var(--gray-400);text-decoration:line-through">$<%= p.originalPrice.toFixed(2) %></span><%}%></td>
+                <td><span class="<%= p.stock>10?'stock-ok':p.stock>0?'stock-low':'stock-out' %>"><%= p.stock %></span></td>
+                <td><%= p.featured?'⭐ Yes':'—' %></td>
+                <td class="table-actions">
+                  <a href="/products/<%= p._id %>" class="btn btn-xs btn-xs-ghost" target="_blank">View</a>
+                  <a href="/admin/products/<%= p._id %>/edit" class="btn btn-xs btn-xs-blue">Edit</a>
+                  <form action="/admin/products/<%= p._id %>?_method=DELETE" method="POST" style="display:inline" onsubmit="return confirm('Delete this product?')">
+                    <button type="submit" class="btn btn-xs btn-xs-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <div class="empty-state"><div class="empty-state-icon">📦</div><h3>No products yet</h3><a href="/admin/products/new" class="btn btn-primary">Add First Product</a></div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

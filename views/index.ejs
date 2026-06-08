@@ -1,0 +1,212 @@
+<%- include('partials/header') %>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag"><span class="hero-tag-dot"></span> New Season 2025</div>
+      <h1 class="hero-title">
+        Discover<br>
+        <span class="word-accent">Premium</span><br>
+        <span class="line-accent">Everything</span>
+      </h1>
+      <p class="hero-sub">Thousands of curated products. Unbeatable prices. Lightning-fast delivery. Your ultimate shopping destination.</p>
+      <div class="hero-actions">
+        <a href="/products" class="btn btn-primary btn-lg">Explore Products →</a>
+        <a href="/products?sort=price-asc" class="btn btn-white btn-lg">🔥 Today's Deals</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">1K+</div><div class="hero-stat-label">Products</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">50K+</div><div class="hero-stat-label">Happy Customers</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">8</div><div class="hero-stat-label">Categories</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">4.9★</div><div class="hero-stat-label">Avg Rating</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-grid">
+        <div class="hero-card-img tall">🎧</div>
+        <div class="hero-card-img">👟</div>
+        <div class="hero-card-img">💻</div>
+        <div class="hero-card-img tall">🎮</div>
+        <div class="hero-card-img">📱</div>
+        <div class="hero-card-img">⌚</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <% const items=['Free Shipping Over $50','New Arrivals Daily','Top Brands','30-Day Returns','Secure Checkout','24/7 Support','Student Discounts','Eco-Friendly Products','Free Shipping Over $50','New Arrivals Daily','Top Brands','30-Day Returns','Secure Checkout','24/7 Support','Student Discounts','Eco-Friendly Products']; %>
+    <% items.forEach(item=>{ %><div class="marquee-item">✦ <%= item %></div><% }) %>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Shop by <span>Category</span></h2>
+        <p class="section-sub">Find exactly what you're looking for</p>
+      </div>
+    </div>
+    <div class="categories-grid">
+      <% const cats=[
+        {name:'Electronics',icon:'📱',color:'cat-card-1',count:'250+'},
+        {name:'Clothing',icon:'👗',color:'cat-card-2',count:'180+'},
+        {name:'Books',icon:'📚',color:'cat-card-3',count:'300+'},
+        {name:'Home & Living',icon:'🏠',color:'cat-card-4',count:'120+'},
+        {name:'Sports',icon:'⚽',color:'cat-card-5',count:'90+'},
+        {name:'Beauty',icon:'💄',color:'cat-card-6',count:'75+'},
+        {name:'Toys',icon:'🧸',color:'cat-card-7',count:'60+'},
+        {name:'Other',icon:'🎁',color:'cat-card-8',count:'200+'},
+      ] %>
+      <% cats.forEach(cat=>{ %>
+        <a href="/products?category=<%= encodeURIComponent(cat.name) %>" class="cat-card <%= cat.color %>">
+          <div class="cat-icon"><%= cat.icon %></div>
+          <div class="cat-name"><%= cat.name %></div>
+          <div class="cat-count"><%= cat.count %> products</div>
+          <div class="cat-arrow">Browse →</div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">⭐ Featured <span>Products</span></h2>
+        <p class="section-sub">Hand-picked by our team</p>
+      </div>
+      <a href="/products?featured=true" class="section-link">View All Featured →</a>
+    </div>
+    <% if(featured&&featured.length>0){ %>
+      <div class="product-grid">
+        <% featured.forEach(function(p){ %>
+          <article class="product-card">
+            <a href="/products/<%= p._id %>" class="product-img-wrap">
+              <img src="<%= p.image %>" alt="<%= p.name %>" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400'">
+              <div class="product-badges">
+                <span class="badge badge-featured">⭐ Featured</span>
+                <% if(p.originalPrice&&p.originalPrice>p.price){ %><span class="badge badge-sale">SALE</span><% } %>
+              </div>
+              <button class="product-wishlist" onclick="event.preventDefault();toggleWish(this)">🤍</button>
+              <div class="product-quick-add" onclick="event.preventDefault();alert('Added to cart! 🛒')">+ Add to Cart</div>
+            </a>
+            <div class="product-body">
+              <div class="product-category"><%= p.category %></div>
+              <h3 class="product-name"><a href="/products/<%= p._id %>"><%= p.name %></a></h3>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-val"><%= p.rating ? p.rating.toFixed(1) : '4.5' %> (<%= p.numReviews||0 %>)</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">
+                  <span class="price-current">$<%= p.price.toFixed(2) %></span>
+                  <% if(p.originalPrice&&p.originalPrice>p.price){ %>
+                    <span class="price-old">$<%= p.originalPrice.toFixed(2) %></span>
+                    <span class="price-save">-<%= Math.round((1-p.price/p.originalPrice)*100) %>%</span>
+                  <% } %>
+                </div>
+                <a href="/products/<%= p._id %>" class="btn btn-xs btn-xs-primary">View</a>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state">
+        <div class="empty-state-icon">📦</div>
+        <h3>No featured products yet</h3>
+        <p>Run <code>node seedDB.js</code> to add sample products.</p>
+        <% if(currentUser&&currentUser.role==='admin'){ %><a href="/admin/products/new" class="btn btn-primary">Add Products</a><% } %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- DEALS BANNER -->
+<section class="section">
+  <div class="container">
+    <div class="deals-banner">
+      <div>
+        <div class="deals-badge">🔥 Limited Time Offer</div>
+        <h2 class="deals-title">Flash Sale<br>Up to 60% Off</h2>
+        <p style="color:rgba(255,255,255,.5);margin-bottom:1.5rem;">Don't miss out on these incredible deals. Sale ends soon!</p>
+        <div class="deals-timer">
+          <div class="timer-box"><div class="timer-num" id="t-h">12</div><div class="timer-label">Hours</div></div>
+          <div class="timer-sep">:</div>
+          <div class="timer-box"><div class="timer-num" id="t-m">45</div><div class="timer-label">Mins</div></div>
+          <div class="timer-sep">:</div>
+          <div class="timer-box"><div class="timer-num" id="t-s">30</div><div class="timer-label">Secs</div></div>
+        </div>
+        <a href="/products?sort=price-asc" class="btn btn-primary btn-lg">Shop the Sale →</a>
+      </div>
+      <div class="deals-products">
+        <% const deals=[{icon:'🎧',name:'Headphones',price:'$49'},{icon:'⌚',name:'Smart Watch',price:'$89'},{icon:'📷',name:'Camera',price:'$199'},{icon:'🎮',name:'Gaming Gear',price:'$29'}] %>
+        <% deals.forEach(function(d){ %>
+          <a href="/products" class="deal-mini-card">
+            <div class="deal-mini-icon"><%= d.icon %></div>
+            <div class="deal-mini-name"><%= d.name %></div>
+            <div class="deal-mini-price">From <%= d.price %></div>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST PRODUCTS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">🆕 Just <span>Arrived</span></h2>
+        <p class="section-sub">Fresh products added this week</p>
+      </div>
+      <a href="/products?sort=newest" class="section-link">See All New →</a>
+    </div>
+    <% if(latest&&latest.length>0){ %>
+      <div class="product-grid product-grid-5">
+        <% latest.forEach(function(p){ %>
+          <article class="product-card">
+            <a href="/products/<%= p._id %>" class="product-img-wrap">
+              <img src="<%= p.image %>" alt="<%= p.name %>" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400'">
+              <div class="product-badges"><span class="badge badge-new">NEW</span></div>
+              <button class="product-wishlist" onclick="event.preventDefault();toggleWish(this)">🤍</button>
+            </a>
+            <div class="product-body">
+              <div class="product-category"><%= p.category %></div>
+              <h3 class="product-name"><a href="/products/<%= p._id %>"><%= p.name %></a></h3>
+              <div class="product-footer">
+                <div class="product-price"><span class="price-current">$<%= p.price.toFixed(2) %></span></div>
+                <a href="/products/<%= p._id %>" class="btn btn-xs btn-xs-ghost">View →</a>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state"><div class="empty-state-icon">📦</div><h3>No products yet</h3><p>Add some from the admin panel.</p></div>
+    <% } %>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Start Shopping?</h2>
+    <p>Join 50,000+ happy customers and discover your next favourite product.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="/products" class="btn btn-white btn-xl">Browse All Products</a>
+      <a href="/signup" class="btn btn-xl" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.3);">Create Free Account</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

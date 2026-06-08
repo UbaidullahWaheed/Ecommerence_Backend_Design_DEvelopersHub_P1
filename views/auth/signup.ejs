@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+<div class="auth-page">
+  <div class="auth-left">
+    <div>
+      <h2 class="auth-left-title">Join 50,000+ happy shoppers</h2>
+      <p class="auth-left-sub">Create your free ShopVerse account and start discovering amazing products today.</p>
+      <div class="auth-feature"><div class="auth-feature-icon">🎁</div>Free welcome discount on first order</div>
+      <div class="auth-feature"><div class="auth-feature-icon">📦</div>Free shipping on orders over $50</div>
+      <div class="auth-feature"><div class="auth-feature-icon">⭐</div>Earn rewards with every purchase</div>
+      <div class="auth-feature"><div class="auth-feature-icon">💬</div>24/7 customer support</div>
+    </div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-form-wrap">
+      <h1 class="auth-form-title">Create Account</h1>
+      <p class="auth-form-sub">Already have an account? <a href="/login" style="color:var(--accent);font-weight:700">Sign in</a></p>
+      <form action="/signup" method="POST" class="auth-form">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" name="name" class="form-input" placeholder="Ubaidullah Waheed" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" name="email" class="form-input" placeholder="you@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password <span class="hint">(min. 6 characters)</span></label>
+          <input type="password" name="password" class="form-input" placeholder="••••••••" required minlength="6"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" name="confirmPassword" class="form-input" placeholder="••••••••" required/>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg">Create Account →</button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

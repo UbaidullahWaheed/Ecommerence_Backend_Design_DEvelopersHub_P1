@@ -1,0 +1,49 @@
+<%- include('../partials/header') %>
+<div class="admin-layout">
+  <nav class="admin-sidebar">
+    <a href="/admin" class="sidebar-link"><span class="sidebar-link-icon">📊</span>Dashboard</a>
+    <a href="/admin/products" class="sidebar-link active"><span class="sidebar-link-icon">📦</span>Products</a>
+    <a href="/admin/products/new" class="sidebar-link"><span class="sidebar-link-icon">➕</span>Add Product</a>
+    <a href="/products" class="sidebar-link"><span class="sidebar-link-icon">🛍️</span>View Store</a>
+    <a href="/logout" class="sidebar-link"><span class="sidebar-link-icon">🚪</span>Logout</a>
+  </nav>
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div><h1>Edit Product</h1><p><%= product.name %></p></div>
+      <div style="display:flex;gap:.75rem">
+        <a href="/products/<%= product._id %>" class="btn btn-ghost btn-sm" target="_blank">Preview →</a>
+        <a href="/admin/products" class="btn btn-ghost btn-sm">← Back</a>
+      </div>
+    </div>
+    <div class="admin-card">
+      <form action="/admin/products/<%= product._id %>?_method=PUT" method="POST" class="product-form">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Product Name *</label><input type="text" name="name" class="form-input" value="<%= product.name %>" required/></div>
+          <div class="form-group"><label class="form-label">Category *</label>
+            <select name="category" class="form-select" required>
+              <% categories.forEach(function(c){%><option value="<%= c %>" <%=product.category===c?'selected':''%>><%= c %></option><%})%>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Price ($) *</label><input type="number" name="price" class="form-input" step="0.01" value="<%= product.price %>" required/></div>
+          <div class="form-group"><label class="form-label">Original Price ($)</label><input type="number" name="originalPrice" class="form-input" step="0.01" value="<%= product.originalPrice||'' %>"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Stock *</label><input type="number" name="stock" class="form-input" value="<%= product.stock %>" required/></div>
+          <div class="form-group"><label class="form-label">Image URL</label><input type="url" name="image" id="imageUrl" class="form-input" value="<%= product.image %>"/></div>
+        </div>
+        <% if(product.image){ %>
+          <div class="img-preview-box"><img id="imgPreview" src="<%= product.image %>" alt="Current"><span style="font-size:.85rem;color:var(--gray-400)">Current image</span></div>
+        <% } %>
+        <div class="form-group"><label class="form-label">Description *</label><textarea name="description" class="form-textarea" rows="5" required><%= product.description %></textarea></div>
+        <div class="form-group"><label class="form-check-label"><input type="checkbox" name="featured" <%=product.featured?'checked':''%>/><span>Featured Product</span></label></div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+          <a href="/admin/products" class="btn btn-ghost">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

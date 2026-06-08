@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+<div class="auth-page">
+  <div class="auth-left">
+    <div>
+      <h2 class="auth-left-title">Welcome back to ShopVerse</h2>
+      <p class="auth-left-sub">Sign in to access your orders, wishlist, and exclusive member deals.</p>
+      <div class="auth-feature"><div class="auth-feature-icon">🛒</div>Track your orders in real-time</div>
+      <div class="auth-feature"><div class="auth-feature-icon">❤️</div>Save products to your wishlist</div>
+      <div class="auth-feature"><div class="auth-feature-icon">🏷️</div>Access member-only discounts</div>
+      <div class="auth-feature"><div class="auth-feature-icon">🔒</div>Secure & encrypted account</div>
+    </div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-form-wrap">
+      <h1 class="auth-form-title">Sign In</h1>
+      <p class="auth-form-sub">Don't have an account? <a href="/signup" style="color:var(--accent);font-weight:700">Create one free</a></p>
+      <form action="/login" method="POST" class="auth-form">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" name="email" class="form-input" placeholder="you@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-input" placeholder="••••••••" required/>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg">Sign In →</button>
+      </form>
+      <div class="auth-demo-box">
+        <strong>Demo Credentials:</strong><br>
+        Admin: <code>admin@shopverse.com</code> / <code>admin123</code><br>
+        User: <code>user@shopverse.com</code> / <code>user123</code>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title><%= title %> | ShopVerse</title>
+  <meta name="description" content="ShopVerse — Premium eCommerce. Discover thousands of products across every category."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+
+<!-- Announcement Bar -->
+<div class="announcement-bar">
+  🚀 Free shipping on orders over $50 <span>|</span> Use code <strong>INTERN25</strong> for 25% off <span>|</span> <a href="/products">Shop Now →</a>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <a href="/" class="nav-logo">Shop<span>Verse</span><sup class="nav-logo-badge">PRO</sup></a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/" class="<%= typeof title!=='undefined'&&title.includes('Home')?'active':'' %>">Home</a></li>
+    <li><a href="/products">Products</a></li>
+    <li><a href="/products?category=Electronics">Electronics</a></li>
+    <li><a href="/products?category=Clothing">Clothing</a></li>
+    <li><a href="/products?sort=price-asc">Deals</a></li>
+    <% if(currentUser&&currentUser.role==='admin'){%><li><a href="/admin" style="color:var(--accent)">Admin</a></li><%}%>
+  </ul>
+
+  <div class="nav-search">
+    <span class="nav-search-icon">🔍</span>
+    <form action="/products" method="GET">
+      <input type="text" name="search" placeholder="Search products..." autocomplete="off"/>
+    </form>
+  </div>
+
+  <div class="nav-actions">
+    <a href="/products?sort=price-asc" class="nav-btn-icon" title="Deals">🏷️</a>
+    <a href="/products" class="nav-btn-icon" title="Wishlist">❤️</a>
+    <% if(currentUser){%>
+      <a href="/admin" class="nav-user-pill">
+        <div class="nav-avatar"><%= currentUser.name.charAt(0).toUpperCase() %></div>
+        <%= currentUser.name.split(' ')[0] %>
+      </a>
+      <a href="/logout" class="btn btn-ghost btn-sm">Logout</a>
+    <%}else{%>
+      <a href="/login" class="btn btn-ghost btn-sm">Login</a>
+      <a href="/signup" class="btn btn-primary btn-sm">Sign Up</a>
+    <%}%>
+  </div>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Flash Messages -->
+<%if(success&&success.length>0){%>
+  <div class="flash flash-success">✅ <%= success %><button class="flash-close" onclick="this.parentElement.remove()">×</button></div>
+<%}%>
+<%if(error&&error.length>0){%>
+  <div class="flash flash-error">⚠️ <%= error %><button class="flash-close" onclick="this.parentElement.remove()">×</button></div>
+<%}%>
+
+<main>

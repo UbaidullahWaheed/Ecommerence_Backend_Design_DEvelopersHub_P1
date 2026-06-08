@@ -1,0 +1,117 @@
+</main>
+
+<!-- Trust Bar -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div><div class="trust-label">Free Shipping</div><div class="trust-sub">On orders over $50</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔄</div>
+        <div><div class="trust-label">Easy Returns</div><div class="trust-sub">30-day return policy</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div><div class="trust-label">Secure Checkout</div><div class="trust-sub">256-bit SSL encryption</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💬</div>
+        <div><div class="trust-label">24/7 Support</div><div class="trust-sub">Always here to help</div></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">⭐</div>
+        <div><div class="trust-label">Top Rated</div><div class="trust-sub">4.9/5 from 50k+ reviews</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Newsletter -->
+<section class="newsletter-section">
+  <div class="container-xs" style="text-align:center">
+    <div class="newsletter-icon">📬</div>
+    <h2 class="newsletter-title">Stay in the Loop</h2>
+    <p class="newsletter-sub">Get weekly deals, new arrivals, and exclusive discounts delivered to your inbox.</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="Enter your email address..."/>
+      <button class="newsletter-btn" onclick="alert('Thanks for subscribing! 🎉')">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">Shop<span>Verse</span></a>
+        <p>A professional eCommerce platform built with Node.js, Express & MongoDB. Your one-stop shop for everything.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">📷</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul class="footer-links-list">
+          <li><a href="/products">All Products</a></li>
+          <li><a href="/products?category=Electronics">Electronics</a></li>
+          <li><a href="/products?category=Clothing">Clothing</a></li>
+          <li><a href="/products?category=Books">Books</a></li>
+          <li><a href="/products?category=Sports">Sports</a></li>
+          <li><a href="/products?sort=price-asc">Best Deals</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul class="footer-links-list">
+          <li><a href="/products?category=Home+%26+Living">Home & Living</a></li>
+          <li><a href="/products?category=Beauty">Beauty</a></li>
+          <li><a href="/products?category=Toys">Toys & Games</a></li>
+          <li><a href="/products?category=Other">Other</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <ul class="footer-links-list">
+          <li><a href="/login">Sign In</a></li>
+          <li><a href="/signup">Create Account</a></li>
+          <% if(currentUser&&currentUser.role==='admin'){%><li><a href="/admin">Admin Panel</a></li><%}%>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Built With</h4>
+        <ul class="footer-links-list">
+          <li><a href="#">Node.js & Express</a></li>
+          <li><a href="#">MongoDB & Mongoose</a></li>
+          <li><a href="#">EJS Templates</a></li>
+          <li><a href="#">JWT Auth</a></li>
+          <li><a href="#">Deployed on Render</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ShopVerse Pro — DevelopersHub Backend Internship by Ubaidullah Waheed</p>
+      <div class="footer-payment">
+        <span class="payment-icon">VISA</span>
+        <span class="payment-icon">MC</span>
+        <span class="payment-icon">AMEX</span>
+        <span class="payment-icon">PayPal</span>
+      </div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "admin001",
+    "name": "Admin User",
+    "email": "admin@shopverse.com",
+    "password": "$2a$12$UTC4CGCrfN/.D/em5j2scOA8GaCocA2GYKXe5ozIg6UkQxO6/gZRC",
+    "role": "admin",
+    "createdAt": "2026-06-06T12:58:51.210Z"
+  },
+  {
+    "_id": "user001",
+    "name": "Test User",
+    "email": "user@shopverse.com",
+    "password": "$2a$12$3GqX.GCwhO8vrHfhVBMZv.QYIqIFRvsQYFn0fR51U79kz/kzzqkrW",
+    "role": "user",
+    "createdAt": "2026-06-06T12:58:51.524Z"
+  }
+]
